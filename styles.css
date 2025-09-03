@@ -2187,7 +2187,7 @@ p {
     transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     border: 2px solid transparent;
     position: relative;
-    cursor: pointer;
+    /* Remove cursor pointer to allow form interaction */
 }
 
 .unified-contact-card::before {
@@ -2201,6 +2201,7 @@ p {
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: 1;
+    pointer-events: none; /* Ensure overlay doesn't block interactions */
 }
 
 .unified-contact-card:hover::before {
@@ -2428,12 +2429,23 @@ p {
     font-family: inherit;
     font-size: var(--font-size-base);
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 10;
+    color: var(--text-primary);
+    /* Ensure inputs are always clickable */
+    pointer-events: auto !important;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
 }
 
 .floating-label input:focus,
 .floating-label textarea:focus {
     outline: none;
     border-bottom-color: var(--accent-color);
+    background: rgba(51, 153, 255, 0.02);
+    z-index: 15;
 }
 
 .floating-label label {
@@ -2508,9 +2520,12 @@ p {
     font-family: inherit;
     font-size: var(--font-size-base);
     transition: all 0.4s ease;
-    appearance: none;
-    cursor: pointer;
     position: relative;
+    z-index: 10;
+    /* Ensure select is always clickable */
+    pointer-events: auto !important;
+    cursor: pointer;
+    appearance: none;
 }
 
 .select-enhanced select:focus {
@@ -3327,6 +3342,50 @@ p {
 }
 
 /* ===== FORM VALIDATION & LOADING STATES ===== */
+/* Ensure form inputs are properly interactive */
+.floating-label input,
+.floating-label textarea,
+.select-enhanced select {
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+
+.floating-label input:focus,
+.floating-label textarea:focus,
+.select-enhanced select:focus {
+    position: relative;
+    z-index: 15;
+}
+
+/* Fix any overlay issues */
+.unified-contact-card * {
+    position: relative;
+}
+
+.unified-contact-card::before,
+.unified-contact-card::after {
+    pointer-events: none;
+    z-index: 1;
+}
+
+.contact-content-grid {
+    position: relative;
+    z-index: 2;
+}
+
+.contact-form-section {
+    position: relative;
+    z-index: 3;
+}
+
 .form-group.error input,
 .form-group.error textarea {
     border-color: #ef4444;

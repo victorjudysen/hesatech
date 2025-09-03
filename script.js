@@ -526,10 +526,54 @@ function animateCounter(element) {
 // ===== CONTACT FORM =====
 function initContactForm() {
     const form = document.getElementById('unified-contact-form');
-    if (!form) return;
+    if (!form) {
+        console.error('Contact form not found!');
+        return;
+    }
+
+    console.log('Contact form initialized successfully');
+
+    // Ensure all form fields are interactive
+    const formFields = form.querySelectorAll('input, textarea, select');
+    formFields.forEach(field => {
+        // Make sure each field is properly interactive
+        field.style.pointerEvents = 'auto';
+        field.style.position = 'relative';
+        field.style.zIndex = '10';
+        
+        // Add test click handler to verify interaction
+        field.addEventListener('click', function() {
+            console.log('Field clicked:', field.id || field.name);
+        });
+        
+        field.addEventListener('focus', function() {
+            console.log('Field focused:', field.id || field.name);
+            this.parentElement.classList.add('focused');
+            // Remove any error states
+            this.parentElement.classList.remove('error');
+        });
+        
+        field.addEventListener('blur', function() {
+            console.log('Field blurred:', field.id || field.name);
+            if (!this.value.trim()) {
+                this.parentElement.classList.remove('focused');
+            }
+            
+            // Real-time validation
+            validateField(this);
+        });
+        
+        // For input and textarea, also listen to input events
+        if (field.type !== 'select-one') {
+            field.addEventListener('input', function() {
+                console.log('Field input:', field.id || field.name, 'Value:', this.value);
+            });
+        }
+    });
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
+        console.log('Form submitted');
         
         // Add loading state
         const submitBtn = form.querySelector('button[type="submit"]');
@@ -550,6 +594,8 @@ function initContactForm() {
         const phone = formData.get('phone');
         const project = formData.get('project');
         const message = formData.get('message');
+        
+        console.log('Form data:', { name, email, phone, project, message });
         
         // Basic validation
         if (!name || !email || !message) {
@@ -612,41 +658,23 @@ function initContactForm() {
         }
     });
 
-    // Enhanced form field animations and validation
-    const formFields = form.querySelectorAll('input, textarea, select');
-    formFields.forEach(field => {
-        field.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
-            // Remove any error states
-            this.parentElement.classList.remove('error');
-        });
-        
-        field.addEventListener('blur', function() {
-            if (!this.value.trim()) {
-                this.parentElement.classList.remove('focused');
-            }
-            
-            // Real-time validation
-            validateField(this);
-        });
-        
-        // Real-time input formatting for phone
-        if (field.type === 'tel') {
-            field.addEventListener('input', function() {
-                // Format phone number as user types
-                let value = this.value.replace(/\D/g, '');
-                if (value.length > 0) {
-                    if (value.length <= 3) {
-                        this.value = value;
-                    } else if (value.length <= 6) {
-                        this.value = value.slice(0, 3) + '-' + value.slice(3);
-                    } else {
-                        this.value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6, 10);
-                    }
+    // Real-time field validation and formatting
+    const phoneField = form.querySelector('#phone');
+    if (phoneField) {
+        phoneField.addEventListener('input', function() {
+            // Format phone number as user types
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value.length <= 3) {
+                    this.value = value;
+                } else if (value.length <= 6) {
+                    this.value = value.slice(0, 3) + '-' + value.slice(3);
+                } else {
+                    this.value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6, 10);
                 }
-            });
-        }
-    });
+            }
+        });
+    }
     
     // Real-time field validation
     function validateField(field) {
