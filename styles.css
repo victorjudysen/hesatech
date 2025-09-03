@@ -1672,6 +1672,68 @@ p {
     border-radius: 50%;
 }
 
+/* ===== MISSION & VISION CARDS ===== */
+.mission-vision-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.mission-card,
+.vision-card {
+    background: var(--background-white);
+    padding: var(--space-lg);
+    border-radius: 15px;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--accent-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.mission-card:hover,
+.vision-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.mission-card::before,
+.vision-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(51, 153, 255, 0.08), transparent);
+    border-radius: 50%;
+}
+
+.mission-vision-cards .card-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-md);
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.mission-vision-cards h4 {
+    color: var(--primary-color);
+    margin-bottom: var(--space-sm);
+    font-weight: 600;
+}
+
+.mission-vision-cards p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
 /* ===== SERVICES SECTION ===== */
 .services-grid {
     display: grid;
@@ -2113,6 +2175,10 @@ p {
 
     .about-stats {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mission-vision-cards {
+        margin-top: var(--space-lg);
     }
 
     .stats-container {
