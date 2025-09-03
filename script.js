@@ -525,7 +525,7 @@ function animateCounter(element) {
 
 // ===== CONTACT FORM =====
 function initContactForm() {
-    const form = document.getElementById('contact-form');
+    const form = document.getElementById('unified-contact-form');
     if (!form) return;
 
     form.addEventListener('submit', function(e) {
@@ -533,46 +533,175 @@ function initContactForm() {
         
         // Add loading state
         const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Sending...';
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnIcon = submitBtn.querySelector('.btn-icon i');
+        const originalText = btnText.textContent;
+        const originalIcon = btnIcon.className;
+        
+        btnText.textContent = 'Sending...';
+        btnIcon.className = 'fas fa-spinner fa-spin';
         submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
         
         // Get form data
         const formData = new FormData(this);
         const name = formData.get('name');
         const email = formData.get('email');
+        const phone = formData.get('phone');
+        const project = formData.get('project');
         const message = formData.get('message');
         
         // Basic validation
         if (!name || !email || !message) {
             showNotification('Please fill in all required fields.', 'error');
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+            resetSubmitButton();
             return;
         }
         
-        // Simulate form submission
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showNotification('Please enter a valid email address.', 'error');
+            resetSubmitButton();
+            return;
+        }
+        
+        // Simulate form submission with realistic delay
         setTimeout(() => {
-            showNotification(`Thank you, ${name}! Your message has been received. We will contact you soon.`, 'success');
+            // Create detailed success message
+            let projectTypeText = project ? getProjectTypeText(project) : 'general inquiry';
+            let successMessage = `Thank you, ${name}! Your ${projectTypeText} consultation request has been received. Our professional team will contact you within 24 hours to discuss your project requirements.`;
+            
+            showNotification(successMessage, 'success');
+            
+            // Reset form and button
             this.reset();
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+            resetSubmitButton();
+            
+            // Remove focused states from form groups
+            const formGroups = form.querySelectorAll('.form-group');
+            formGroups.forEach(group => {
+                group.classList.remove('focused');
+            });
+            
+            // Optional: Send confirmation email (would need backend integration)
+            console.log('Form submitted:', {
+                name, email, phone, project, message,
+                timestamp: new Date().toISOString()
+            });
+            
         }, 2000);
+        
+        function resetSubmitButton() {
+            btnText.textContent = originalText;
+            btnIcon.className = originalIcon;
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('loading');
+        }
+        
+        function getProjectTypeText(projectType) {
+            const projectTypes = {
+                'residential': 'residential construction',
+                'commercial': 'commercial development',
+                'civil': 'civil engineering',
+                'renovation': 'renovation/remodeling',
+                'consultation': 'professional consultation',
+                'other': 'construction services'
+            };
+            return projectTypes[projectType] || 'construction';
+        }
     });
 
-    // Enhanced form field animations
+    // Enhanced form field animations and validation
     const formFields = form.querySelectorAll('input, textarea, select');
     formFields.forEach(field => {
         field.addEventListener('focus', function() {
             this.parentElement.classList.add('focused');
+            // Remove any error states
+            this.parentElement.classList.remove('error');
         });
         
         field.addEventListener('blur', function() {
-            if (!this.value) {
+            if (!this.value.trim()) {
                 this.parentElement.classList.remove('focused');
             }
+            
+            // Real-time validation
+            validateField(this);
         });
+        
+        // Real-time input formatting for phone
+        if (field.type === 'tel') {
+            field.addEventListener('input', function() {
+                // Format phone number as user types
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 0) {
+                    if (value.length <= 3) {
+                        this.value = value;
+                    } else if (value.length <= 6) {
+                        this.value = value.slice(0, 3) + '-' + value.slice(3);
+                    } else {
+                        this.value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6, 10);
+                    }
+                }
+            });
+        }
     });
+    
+    // Real-time field validation
+    function validateField(field) {
+        const value = field.value.trim();
+        const fieldType = field.type;
+        const isRequired = field.hasAttribute('required');
+        
+        let isValid = true;
+        let errorMessage = '';
+        
+        if (isRequired && !value) {
+            isValid = false;
+            errorMessage = 'This field is required';
+        } else if (fieldType === 'email' && value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                isValid = false;
+                errorMessage = 'Please enter a valid email address';
+            }
+        } else if (fieldType === 'tel' && value) {
+            const phoneRegex = /^[\d\-\s\+\(\)]+$/;
+            if (!phoneRegex.test(value) || value.replace(/\D/g, '').length < 9) {
+                isValid = false;
+                errorMessage = 'Please enter a valid phone number';
+            }
+        }
+        
+        // Update field appearance
+        if (!isValid) {
+            field.parentElement.classList.add('error');
+            showFieldError(field, errorMessage);
+        } else {
+            field.parentElement.classList.remove('error');
+            hideFieldError(field);
+        }
+        
+        return isValid;
+    }
+    
+    function showFieldError(field, message) {
+        let errorElement = field.parentElement.querySelector('.field-error');
+        if (!errorElement) {
+            errorElement = document.createElement('div');
+            errorElement.className = 'field-error';
+            field.parentElement.appendChild(errorElement);
+        }
+        errorElement.textContent = message;
+    }
+    
+    function hideFieldError(field) {
+        const errorElement = field.parentElement.querySelector('.field-error');
+        if (errorElement) {
+            errorElement.remove();
+        }
+    }
 }
 
 // ===== NOTIFICATION SYSTEM =====
