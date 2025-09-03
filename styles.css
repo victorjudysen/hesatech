@@ -1841,7 +1841,7 @@ p {
     box-shadow: var(--shadow-light);
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
-    height: 320px; /* Reduced height */
+    height: 380px; /* Increased height to show all content */
     cursor: pointer;
     border: 2px solid transparent;
 }
@@ -1936,8 +1936,8 @@ p {
 }
 
 .project-content {
-    padding: var(--space-md) var(--space-lg); /* Reduced padding */
-    height: 140px; /* Fixed height for content */
+    padding: var(--space-md) var(--space-lg);
+    height: 200px; /* Increased height to accommodate all content */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
