@@ -2518,6 +2518,22 @@ p {
     width: 100%;
 }
 
+.select-wrapper select {
+    width: 100%;
+    padding: var(--space-md) var(--space-lg) var(--space-md) var(--space-md);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--background-white);
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+    pointer-events: auto !important;
+    cursor: pointer;
+    appearance: none;
+}
+
 .select-enhanced select {
     width: 100%;
     padding: var(--space-md) var(--space-lg) var(--space-md) var(--space-md);
@@ -2549,15 +2565,20 @@ p {
 
 .select-arrow {
     position: absolute;
-    right: 15px;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-secondary);
     pointer-events: none;
     transition: all 0.4s ease;
-    z-index: 2;
-    /* Ensure arrow is inside select box */
-    margin-top: 0;
+    z-index: 15;
+    /* Ensure arrow appears inside the select box */
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
 }
 
 .select-enhanced:hover .select-arrow,
