@@ -515,96 +515,132 @@
             </section>
 
             <!-- Contact Section -->
-            <section id="contact" class="section">
+            <section id="contact" class="section contact-section">
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">Get In Touch</h2>
                         <p class="section-subtitle">Ready to start your construction project? Contact us for a professional consultation</p>
                     </div>
                     
-                    <div class="contact-grid">
-                        <div class="contact-info reveal-left">
-                            <h3 class="mb-lg">Contact Information</h3>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div>
-                                    <h5>Address</h5>
-                                    <p>Dar es Salaam, Tanzania</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div>
-                                    <h5>Phone</h5>
-                                    <p>+255 XXX XXX XXX</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <h5>Email</h5>
-                                    <p>info@hesatech.co.tz</p>
+                    <div class="contact-unified-container">
+                        <!-- Unified Contact Card -->
+                        <div class="unified-contact-card reveal">
+                            <!-- Company Header Section -->
+                            <div class="contact-company-header">
+                                <div class="company-branding">
+                                    <div class="company-icon-container">
+                                        <div class="company-icon">
+                                            <i class="fas fa-building"></i>
+                                        </div>
+                                        <div class="company-glow"></div>
+                                    </div>
+                                    <div class="company-info">
+                                        <h3>Hesatech Investment Limited</h3>
+                                        <p class="company-tagline">Licensed Building & Civil Engineering Contractors</p>
+                                        <div class="company-credentials">
+                                            <span class="credential-badge">Class I Building</span>
+                                            <span class="credential-badge">Class II Civil</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-clock"></i>
+                            <!-- Contact Content Grid -->
+                            <div class="contact-content-grid">
+                                <!-- Left: Company Details -->
+                                <div class="company-details-section">
+                                    <h4>Company Information</h4>
+                                    
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="detail-content">
+                                        <h5>Head Office</h5>
+                                        <p>Dodoma, Tanzania</p>
+                                        <span class="detail-note">Serving Nationwide</span>
+                                    </div>
+                                </div>                                    <div class="detail-item">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <h5>Business Hours</h5>
+                                            <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                                            <p>Saturday: 8:00 AM - 12:00 PM</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="service-coverage">
+                                        <h5>Service Coverage</h5>
+                                        <div class="coverage-tags">
+                                            <span class="coverage-tag primary">Dodoma</span>
+                                            <span class="coverage-tag">Dar es Salaam</span>
+                                            <span class="coverage-tag">Arusha</span>
+                                            <span class="coverage-tag">Mwanza</span>
+                                            <span class="coverage-tag">Nationwide</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h5>Business Hours</h5>
-                                    <p>Monday - Friday: 8:00 AM - 5:00 PM<br>Saturday: 8:00 AM - 12:00 PM</p>
+                                
+                                <!-- Right: Contact Form -->
+                                <div class="contact-form-section">
+                                    <h4>Request Professional Consultation</h4>
+                                    <p class="form-description">Tell us about your construction project and we'll provide expert advice</p>
+                                    
+                                    <form id="unified-contact-form" class="unified-form">
+                                        <div class="form-row">
+                                            <div class="form-group floating-label">
+                                                <input type="text" id="name" name="name" required>
+                                                <label for="name">Full Name *</label>
+                                                <div class="form-underline"></div>
+                                            </div>
+                                            
+                                            <div class="form-group floating-label">
+                                                <input type="email" id="email" name="email" required>
+                                                <label for="email">Email Address *</label>
+                                                <div class="form-underline"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group floating-label">
+                                            <input type="tel" id="phone" name="phone">
+                                            <label for="phone">Phone Number (Optional)</label>
+                                            <div class="form-underline"></div>
+                                        </div>
+                                        
+                                        <div class="form-group select-enhanced">
+                                            <label for="project">Project Type</label>
+                                            <select id="project" name="project">
+                                                <option value="">Select Your Project Type</option>
+                                                <option value="residential">🏠 Residential Construction</option>
+                                                <option value="commercial">🏢 Commercial Development</option>
+                                                <option value="civil">🛣️ Civil Engineering & Infrastructure</option>
+                                                <option value="renovation">🔨 Renovation/Remodeling</option>
+                                                <option value="consultation">💼 Professional Consultation</option>
+                                                <option value="other">⚡ Other Construction Services</option>
+                                            </select>
+                                            <div class="select-arrow">
+                                                <i class="fas fa-chevron-down"></i>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group floating-label">
+                                            <textarea id="message" name="message" required></textarea>
+                                            <label for="message">Project Details & Requirements *</label>
+                                            <div class="form-underline"></div>
+                                        </div>
+                                        
+                                        <button type="submit" class="btn btn-primary unified-submit">
+                                            <span class="btn-text">Send Consultation Request</span>
+                                            <div class="btn-icon">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </div>
+                                            <div class="btn-glow"></div>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="contact-form reveal-right">
-                            <h3 class="mb-lg">Send Us a Message</h3>
-                            <form id="contact-form">
-                                <div class="form-group">
-                                    <label for="name">Full Name *</label>
-                                    <input type="text" id="name" name="name" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="email">Email Address *</label>
-                                    <input type="email" id="email" name="email" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="tel" id="phone" name="phone">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="project">Project Type</label>
-                                    <select id="project" name="project">
-                                        <option value="">Select Project Type</option>
-                                        <option value="residential">Residential Construction</option>
-                                        <option value="commercial">Commercial Development</option>
-                                        <option value="civil">Civil Engineering & Infrastructure</option>
-                                        <option value="renovation">Renovation/Remodeling</option>
-                                        <option value="consultation">Consultation</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="message">Message *</label>
-                                    <textarea id="message" name="message" placeholder="Tell us about your project requirements..." required></textarea>
-                                </div>
-                                
-                                <button type="submit" class="btn btn-primary">Send Message</button>
-                            </form>
                         </div>
                     </div>
                 </div>
