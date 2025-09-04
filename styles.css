@@ -1241,7 +1241,6 @@
     .highlight-item span {
         font-size: var(--font-size-xs);
     }
-}
 
 @media (max-width: 480px) {
     .loader-branding {
