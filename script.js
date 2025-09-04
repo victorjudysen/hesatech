@@ -24,39 +24,49 @@ function initializeApp() {
 // ===== CREATIVE WELCOME LOADER =====
 function initWelcomeLoader() {
     const welcomeLoader = document.getElementById('welcome-loader');
-    const progressFill = document.getElementById('progress-fill');
+    const orbitalProgress = document.querySelector('.orbital-progress');
     const progressPercentage = document.getElementById('progress-percentage');
     const highlightItems = document.querySelectorAll('.highlight-item');
-    const progressTruck = document.querySelector('.progress-truck');
+    
+    // Safety check - if welcome loader doesn't exist, return early
+    if (!welcomeLoader) {
+        return;
+    }
+    
+    // Safety check for required elements
+    if (!orbitalProgress || !progressPercentage) {
+        return;
+    }
     
     let progress = 0;
     let currentHighlight = 0;
     
-    // Progress animation
+    // Progress animation with smoother increments
     const progressInterval = setInterval(() => {
-        progress += Math.random() * 3 + 1; // Random increment between 1-4
+        progress += Math.random() * 2.5 + 1.5; // Slightly faster increment between 1.5-4
         
         if (progress > 100) {
             progress = 100;
             clearInterval(progressInterval);
             
-            // Complete loading after a short delay
+            // Complete loading with shorter delay for better UX
             setTimeout(() => {
                 completeLoading();
-            }, 800);
+            }, 600);
         }
         
-        // Update progress bar and percentage
-        progressFill.style.width = progress + '%';
+        // Update orbital progress and percentage
+        const degrees = (progress / 100) * 360;
+        orbitalProgress.style.setProperty('--progress', degrees + 'deg');
         progressPercentage.textContent = Math.floor(progress);
         
-        // Move truck with progress
-        progressTruck.style.left = Math.min(progress, 95) + '%';
-        
-    }, 150);
+    }, 130); // Slightly faster updates
     
-    // Feature highlights rotation
+    // Feature highlights rotation with improved timing
     const highlightInterval = setInterval(() => {
+        // Safety check for highlight items
+        if (highlightItems.length === 0) return;
+        
         // Remove active class from current highlight
         highlightItems[currentHighlight].classList.remove('active');
         
@@ -70,7 +80,7 @@ function initWelcomeLoader() {
         if (progress >= 100) {
             clearInterval(highlightInterval);
         }
-    }, 1200);
+    }, 1000); // Faster rotation for better engagement
     
     // Construction sound effects simulation (optional - can be removed if no audio)
     function playConstructionSounds() {
@@ -140,15 +150,18 @@ function initWelcomeLoader() {
     const progressLabel = document.querySelector('.progress-label');
     let messageIndex = 0;
     
-    const messageInterval = setInterval(() => {
-        if (messageIndex < loadingMessages.length && progress < 100) {
-            progressLabel.textContent = loadingMessages[messageIndex];
-            messageIndex++;
-        } else if (progress >= 100) {
-            progressLabel.textContent = "Welcome to Hesatech Investment Limited!";
-            clearInterval(messageInterval);
-        }
-    }, 1000);
+    // Safety check for progress label
+    if (progressLabel) {
+        const messageInterval = setInterval(() => {
+            if (messageIndex < loadingMessages.length && progress < 100) {
+                progressLabel.textContent = loadingMessages[messageIndex];
+                messageIndex++;
+            } else if (progress >= 100) {
+                progressLabel.textContent = "Welcome to Hesatech Investment Limited!";
+                clearInterval(messageInterval);
+            }
+        }, 1000);
+    }
     
     // Add CSS animation for loader complete
     const style = document.createElement('style');
