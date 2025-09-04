@@ -757,6 +757,7 @@
         transparent 360deg
     );
     filter: drop-shadow(0 0 15px rgba(51, 153, 255, 0.5));
+    border: 1px solid rgba(51, 153, 255, 0.2);
 }
 
 .orbital-progress::before {
@@ -881,8 +882,17 @@
     font-size: 12px;
     font-weight: 700;
     text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.8),
+        0 0 6px rgba(0, 0, 0, 0.6);
     z-index: 1;
+    background: rgba(0, 20, 40, 0.4);
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .orbital-ring {
@@ -1195,24 +1205,26 @@
     }
     
     .construction-progress {
-        width: 50px;
-        height: 50px;
+        width: 55px;
+        height: 55px;
         top: 10px;
         right: 10px;
     }
     
     .orbital-center {
-        width: 28px;
-        height: 28px;
+        width: 32px;
+        height: 32px;
     }
     
     .progress-text {
-        font-size: 9px;
+        font-size: 10px;
+        font-weight: 600;
     }
     
     .particle {
         width: 2px;
         height: 2px;
+    }
     }
     
     .feature-highlights {
@@ -1258,10 +1270,29 @@
     }
     
     .construction-progress {
-        bottom: 12%;
-        width: 94%;
-        max-width: 340px;
-        padding: 18px;
+        width: 45px;
+        height: 45px;
+        top: 8px;
+        right: 8px;
+    }
+    
+    .orbital-center {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .progress-text {
+        font-size: 8px;
+        font-weight: 600;
+    }
+    
+    .particle {
+        width: 1.5px;
+        height: 1.5px;
+    }
+    
+    .orbital-ring {
+        border-width: 1.5px;
     }
     
     .progress-label {
@@ -1296,6 +1327,42 @@
     .building {
         width: 60px !important;
         height: 25vh !important;
+    }
+}
+
+/* ===== EXTRA SMALL SCREENS ===== */
+@media (max-width: 320px) {
+    .construction-progress {
+        width: 40px;
+        height: 40px;
+        top: 6px;
+        right: 6px;
+    }
+    
+    .orbital-center {
+        width: 22px;
+        height: 22px;
+        border-width: 1px;
+    }
+    
+    .progress-text {
+        font-size: 7px;
+        font-weight: 700;
+    }
+    
+    .particle {
+        width: 1px;
+        height: 1px;
+    }
+    
+    .orbital-ring {
+        border-width: 1px;
+        border-top-width: 1px;
+        border-right-width: 1px;
+    }
+    
+    .loader-branding {
+        padding: 16px 12px;
     }
 }
 
