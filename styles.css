@@ -636,6 +636,104 @@
     );
 }
 
+/* ===== NEW CONSTRUCTION ELEMENTS ===== */
+.brick {
+    top: 60%;
+    left: 15%;
+    background: linear-gradient(145deg, #8B4513, #A0522D, #CD853F);
+    border-radius: 3px;
+    position: relative;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+.brick::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: rgba(139, 69, 19, 0.6);
+}
+
+.cement-mixer {
+    top: 40%;
+    right: 20%;
+    background: linear-gradient(145deg, #6B7280, #9CA3AF, #E5E7EB);
+    border-radius: 50%;
+    position: relative;
+}
+
+.cement-mixer::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    background: linear-gradient(145deg, #374151, #4B5563);
+    border-radius: 50%;
+}
+
+.wrench {
+    top: 70%;
+    left: 70%;
+    background: linear-gradient(145deg, #DC2626, #EF4444, #F87171);
+    border-radius: 8px;
+    transform: rotate(-45deg);
+    position: relative;
+}
+
+.wrench::before {
+    content: '';
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    right: 25%;
+    bottom: 25%;
+    background: linear-gradient(145deg, #991B1B, #DC2626);
+    border-radius: 4px;
+}
+
+.level-tool {
+    top: 15%;
+    left: 60%;
+    background: linear-gradient(145deg, #059669, #10B981, #34D399);
+    border-radius: 6px;
+    position: relative;
+}
+
+.level-tool::before {
+    content: '';
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    right: 20%;
+    height: 20%;
+    background: rgba(255, 255, 0, 0.8);
+    border-radius: 2px;
+}
+
+.concrete-block {
+    bottom: 40%;
+    right: 10%;
+    background: linear-gradient(145deg, #71717A, #A1A1AA, #D4D4D8);
+    border-radius: 2px;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.concrete-block::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    right: 20%;
+    bottom: 20%;
+    background: linear-gradient(145deg, #52525B, #71717A);
+    border-radius: 1px;
+}
+
 @keyframes float {
     0%, 100% { 
         transform: translateY(0) rotate(0deg);
@@ -4183,5 +4281,622 @@ p {
     100% {
         opacity: 1;
         transform: translate(-50%, -50%) translateY(0) scale(1);
+    }
+}
+
+/* ===== MATERIAL FLOW EFFECTS ===== */
+.material-flow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.concrete-pour {
+    position: absolute;
+    top: 20%;
+    left: 45%;
+    width: 8px;
+    height: 80px;
+    background: linear-gradient(180deg, 
+        #8B7355 0%, 
+        #A0956B 30%, 
+        #B8A67D 50%, 
+        #8B7355 100%);
+    border-radius: 4px;
+    animation: concretePour 4s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+.concrete-pour::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -2px;
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(135deg, #A0956B, #8B7355);
+    border-radius: 50%;
+    animation: concreteDrops 0.8s ease-in-out infinite;
+}
+
+.steel-beams {
+    position: absolute;
+    top: 30%;
+    right: 25%;
+    width: 60px;
+    height: 6px;
+    background: linear-gradient(90deg, 
+        #4A5568 0%, 
+        #718096 20%, 
+        #A0AEC0 50%, 
+        #718096 80%, 
+        #4A5568 100%);
+    border-radius: 3px;
+    animation: steelBeamMove 6s linear infinite;
+    box-shadow: 0 2px 8px rgba(74, 85, 104, 0.3);
+}
+
+.steel-beams::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 10px;
+    width: 40px;
+    height: 6px;
+    background: linear-gradient(90deg, #2D3748, #4A5568);
+    border-radius: 3px;
+    animation: steelBeamMove 6s linear infinite 0.5s;
+}
+
+.steel-beams::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 20px;
+    width: 30px;
+    height: 6px;
+    background: linear-gradient(90deg, #1A202C, #2D3748);
+    border-radius: 3px;
+    animation: steelBeamMove 6s linear infinite 1s;
+}
+
+.construction-dust {
+    position: absolute;
+    bottom: 25%;
+    left: 35%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+        rgba(255, 218, 185, 0.6) 0%, 
+        rgba(222, 184, 135, 0.4) 40%, 
+        rgba(205, 133, 63, 0.2) 70%, 
+        transparent 100%);
+    animation: dustCloud 3s ease-in-out infinite;
+    filter: blur(2px);
+}
+
+.construction-dust::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+        rgba(255, 228, 196, 0.4) 0%, 
+        rgba(222, 184, 135, 0.2) 60%, 
+        transparent 100%);
+    animation: dustParticles 2.5s ease-in-out infinite 0.8s;
+    filter: blur(1px);
+}
+
+.construction-dust::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+        rgba(210, 180, 140, 0.3) 0%, 
+        rgba(188, 143, 143, 0.1) 50%, 
+        transparent 100%);
+    animation: dustParticles 3.2s ease-in-out infinite 1.5s;
+    filter: blur(1.5px);
+}
+
+/* Material Flow Animations */
+@keyframes concretePour {
+    0% {
+        height: 0;
+        opacity: 0;
+    }
+    20% {
+        height: 80px;
+        opacity: 0.8;
+    }
+    80% {
+        height: 80px;
+        opacity: 0.8;
+    }
+    100% {
+        height: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes concreteDrops {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(20px) scale(0.8);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(40px) scale(0.6);
+        opacity: 0;
+    }
+}
+
+@keyframes steelBeamMove {
+    0% {
+        transform: translateX(-20px) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(120px) rotate(3deg);
+        opacity: 0;
+    }
+}
+
+@keyframes dustCloud {
+    0% {
+        transform: scale(0.8) translateY(0);
+        opacity: 0;
+    }
+    30% {
+        transform: scale(1.2) translateY(-10px);
+        opacity: 0.6;
+    }
+    70% {
+        transform: scale(1.5) translateY(-20px);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(2) translateY(-40px);
+        opacity: 0;
+    }
+}
+
+@keyframes dustParticles {
+    0% {
+        transform: scale(0.5) translateY(0);
+        opacity: 0;
+    }
+    40% {
+        transform: scale(1) translateY(-15px);
+        opacity: 0.4;
+    }
+    80% {
+        transform: scale(1.3) translateY(-30px);
+        opacity: 0.2;
+    }
+    100% {
+        transform: scale(1.8) translateY(-50px);
+        opacity: 0;
+    }
+}
+
+/* ===== ADVANCED CONSTRUCTION OPERATIONS ===== */
+.construction-operations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.excavator-arm {
+    position: absolute;
+    top: 35%;
+    left: 15%;
+    width: 80px;
+    height: 8px;
+    background: linear-gradient(90deg, 
+        #FFD700 0%, 
+        #FFA500 30%, 
+        #FF8C00 50%, 
+        #FF6347 70%, 
+        #CD853F 100%);
+    border-radius: 4px;
+    transform-origin: left center;
+    animation: excavatorWork 8s ease-in-out infinite;
+    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
+}
+
+.excavator-arm::before {
+    content: '';
+    position: absolute;
+    right: -15px;
+    top: -8px;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #4A5568, #2D3748);
+    border-radius: 3px;
+    animation: excavatorBucket 8s ease-in-out infinite;
+}
+
+.excavator-arm::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: -6px;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #FFD700, #CD853F);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+.welding-sparks {
+    position: absolute;
+    top: 50%;
+    right: 30%;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+        rgba(0, 191, 255, 0.8) 0%, 
+        rgba(30, 144, 255, 0.6) 30%, 
+        rgba(65, 105, 225, 0.4) 60%, 
+        transparent 100%);
+    animation: weldingFlash 2s ease-in-out infinite;
+    filter: blur(1px);
+}
+
+.welding-sparks::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, 
+        rgba(255, 255, 255, 0.9) 0%, 
+        rgba(0, 191, 255, 0.7) 20%, 
+        transparent 40%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: sparkCore 1.5s ease-in-out infinite;
+}
+
+.welding-sparks::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 8px;
+    height: 8px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    box-shadow: 
+        15px 10px 0 #00BFFF,
+        -10px 20px 0 #1E90FF,
+        25px -5px 0 #4169E1,
+        -5px -15px 0 #0099FF,
+        40px 25px 0 #87CEEB;
+    animation: sparkParticles 1.8s linear infinite;
+}
+
+.cement-truck {
+    position: absolute;
+    bottom: 20%;
+    left: -100px;
+    width: 80px;
+    height: 40px;
+    background: linear-gradient(135deg, 
+        #FF6B6B 0%, 
+        #FF8E53 30%, 
+        #FF6B6B 60%, 
+        #E55353 100%);
+    border-radius: 8px 8px 4px 4px;
+    animation: truckDrive 12s linear infinite;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.cement-truck::before {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(45deg, #C0C0C0, #808080);
+    border-radius: 50%;
+    animation: drumRotate 2s linear infinite;
+}
+
+.cement-truck::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 10px;
+    width: 12px;
+    height: 12px;
+    background: #2C3E50;
+    border-radius: 50%;
+    box-shadow: 
+        50px 0 0 #2C3E50;
+}
+
+.scaffolding-rise {
+    position: absolute;
+    right: 20%;
+    bottom: 0;
+    width: 6px;
+    height: 0;
+    background: linear-gradient(180deg, 
+        #4A5568 0%, 
+        #718096 50%, 
+        #A0AEC0 100%);
+    animation: scaffoldingBuild 10s ease-out infinite;
+    border-radius: 3px 3px 0 0;
+}
+
+.scaffolding-rise::before {
+    content: '';
+    position: absolute;
+    left: -3px;
+    top: 0;
+    width: 12px;
+    height: 3px;
+    background: #2D3748;
+    animation: scaffoldingPlatforms 10s ease-out infinite;
+}
+
+.scaffolding-rise::after {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 0;
+    width: 18px;
+    height: 2px;
+    background: #4A5568;
+    animation: scaffoldingPlatforms 10s ease-out infinite 0.5s;
+}
+
+.blueprint-roll {
+    position: absolute;
+    top: 15%;
+    right: 15%;
+    width: 60px;
+    height: 8px;
+    background: linear-gradient(90deg, 
+        #E8F4FD 0%, 
+        #B3D9FF 30%, 
+        #81C4FF 50%, 
+        #4A90E2 70%, 
+        #2171B5 100%);
+    border-radius: 4px;
+    animation: blueprintUnroll 6s ease-in-out infinite;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+.blueprint-roll::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: -4px;
+    width: 8px;
+    height: 16px;
+    background: #2171B5;
+    border-radius: 50%;
+    animation: blueprintRoll 6s ease-in-out infinite;
+}
+
+.blueprint-roll::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 10px;
+    width: 40px;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        #4A90E2 0px,
+        #4A90E2 2px,
+        transparent 2px,
+        transparent 6px
+    );
+    animation: blueprintLines 6s ease-in-out infinite;
+}
+
+/* Advanced Construction Operation Animations */
+@keyframes excavatorWork {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-15deg);
+    }
+    50% {
+        transform: rotate(-30deg);
+    }
+    75% {
+        transform: rotate(-15deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes excavatorBucket {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        transform: rotate(10deg) scale(1.1);
+    }
+    50% {
+        transform: rotate(20deg) scale(1.2);
+    }
+    75% {
+        transform: rotate(10deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+@keyframes weldingFlash {
+    0% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+}
+
+@keyframes sparkCore {
+    0% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+}
+
+@keyframes sparkParticles {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.8) rotate(180deg);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(0.5) rotate(360deg);
+        opacity: 0.3;
+    }
+}
+
+@keyframes truckDrive {
+    0% {
+        left: -100px;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        left: calc(100% + 100px);
+        opacity: 0;
+    }
+}
+
+@keyframes drumRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes scaffoldingBuild {
+    0% {
+        height: 0;
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        height: 200px;
+        opacity: 1;
+    }
+}
+
+@keyframes scaffoldingPlatforms {
+    0% {
+        opacity: 0;
+        width: 0;
+    }
+    50% {
+        opacity: 1;
+        width: 18px;
+    }
+    100% {
+        opacity: 1;
+        width: 18px;
+    }
+}
+
+@keyframes blueprintUnroll {
+    0% {
+        width: 8px;
+        opacity: 0.5;
+    }
+    50% {
+        width: 80px;
+        opacity: 1;
+    }
+    100% {
+        width: 60px;
+        opacity: 0.8;
+    }
+}
+
+@keyframes blueprintRoll {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(720deg);
+    }
+}
+
+@keyframes blueprintLines {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.7;
     }
 }
